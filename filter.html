@@ -1,0 +1,625 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+<style>
+
+    html {
+        width: 100%;
+        height: 100%;
+    }
+    body{
+        font-family: Roboto, sans-serif;
+        background-color: slategray;
+        width: 100%;
+        height: 100%;
+    }
+    .filter {
+        width: 270px;
+
+
+    }
+    .btn-dropdown-filter {
+        width: 270px;
+        height: 50px;
+        border: 1px solid #dadada;
+        background: url(https://giroskutershop.ru/t/v1918/images/bluedio.jpg);
+        color: white;
+        font-size: 1.15em;
+        font-weight: bold;
+        cursor: pointer;
+
+    }
+    .filter-container {
+        position: relative;
+        margin: 0;
+        text-align: center;
+        display: none;
+        width: 260px;
+        padding: 5px;
+        background: #F6F6F6;
+        padding-bottom: 120px;
+
+    }
+    .filter-input-text {
+        width: 100px;
+        min-height: 25px;
+        text-align: center;
+    }
+    .filter-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+    }
+    .filter-price-beetween {
+        width: 25px;
+        height: 0px;
+        border-top: 2px solid #383838;
+    }
+
+
+    .filter-dropdown-link {
+        min-height: 25px;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #dadada;
+        background: url("https://image.flaticon.com/icons/png/512/19/19967.png");
+        background-repeat: no-repeat;
+        background-size: auto 90%;
+        background-position: 95% 50%;
+    }
+    .filter-dropdown-link:nth-child(n+6) {
+        display: none;
+    }
+    .filter-open-links {
+        display: inline-block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        color: black;
+        font-style: italic;
+        font-weight: bolder;
+        text-decoration: none;
+        border-bottom: 1px dashed black;
+        opacity: .8;
+
+
+    }
+    .filter-open-links:hover {
+        opacity: 1;
+    }
+
+    .filter-dropdown-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        display: none;
+        padding: 5px;
+    }
+    .filter-price-container {
+        display: flex;
+
+    }
+    .filter-item-input {
+        display: flex;
+        width: 95%;
+        justify-content: space-around;
+        align-items: center;
+        padding: 5px 0;
+
+    }
+    .filter-container-btn {
+        position: absolute;
+
+        width: 260px;
+        padding: 5px;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: space-around;
+
+    }
+    .filter-btn-show {
+        height: 40px;
+        background: url(https://giroskutershop.ru/t/v1918/images/redio.jpg);
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        width: 40%;
+
+    }
+    .filter-btn-clear {
+        height: 40px;
+        background: url(https://giroskutershop.ru/t/v1918/images/bluedio.jpg);
+        color: white;
+        font-size: .9em;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        width: 30%;
+
+    }
+    .filter-btn-close {
+        display: flex;
+        height: 25px;
+        border: 1px solid #dadada;
+        align-self: center;
+        cursor: pointer;
+        align-items: center;
+        width: 10%;
+        font-weight: bold;
+        font-size: 1.2em;
+        justify-content: center;
+        color: white;
+        background: url(https://giroskutershop.ru/g/shop2v2/default/images/panel-bg.png);
+    }
+
+    .filter-item-range {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .irs--flat .irs-bar {
+        background-color: #3573a4;
+    }
+    .irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single {
+        background-color: #3573a4;
+
+    }
+    .irs--flat .irs-from:before, .irs--flat .irs-to:before, .irs--flat .irs-single:before {
+        border-top-color: #3573a4;
+    }
+    .irs--flat .irs-handle>i:first-child {
+        background-color: #3573a4;
+
+    }
+    .irs--flat .irs-handle.state_hover>i:first-child, .irs--flat .irs-handle:hover>i:first-child {
+        background-color: #3573a4;
+    }
+
+    @-moz-keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 15px;
+        }
+    }
+    @-webkit-keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 15px;
+        }
+    }
+    @keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 15px;
+        }
+    }
+    @keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+        50% {
+            height: 0;
+        }
+        100% {
+            height: 36px;
+        }
+    }
+    @-webkit-keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+        50% {
+            height: 0;
+        }
+        100% {
+            height: 36px;
+        }
+    }
+    @-moz-keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+        50% {
+            height: 0;
+        }
+        100% {
+            height: 36px;
+        }
+    }
+    .filter-checkbox-input {
+        display: none;
+    }
+    .filter-checkbox-text {
+        position: relative;
+        padding: 0 0 0 40px;
+        cursor: pointer;
+    }
+    .filter-item-checkbox {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .filter-checkbox-label {
+        margin: 5px 0;
+        height: 30px;
+        width: 30px;
+        align-items: center;
+        display: flex;
+        background-color: transparent;
+        border: 3px solid #000;
+        border-radius: 5px;
+        position: relative;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-transition: border-color ease 0.2s;
+        -o-transition: border-color ease 0.2s;
+        -webkit-transition: border-color ease 0.2s;
+        transition: border-color ease 0.2s;
+        cursor: pointer;
+    }
+    .filter-checkbox-label::before, .filter-checkbox-label::after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        position: absolute;
+        height: 0;
+        width: 6px;
+        background-color: #3573a4;
+        display: inline-block;
+        -moz-transform-origin: left top;
+        -ms-transform-origin: left top;
+        -o-transform-origin: left top;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        border-radius: 5px;
+        content: ' ';
+        -webkit-transition: opacity ease 0.5;
+        -moz-transition: opacity ease 0.5;
+        transition: opacity ease 0.5;
+    }
+    .filter-checkbox-label::before {
+        top: 21.6px;
+        left: 12.3px;
+        box-shadow: 0 0 0 1.5px #F6F6F6;
+        -moz-transform: rotate(-135deg);
+        -ms-transform: rotate(-135deg);
+        -o-transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+    }
+    .filter-checkbox-label::after {
+        top: 11.1px;
+        left: 1.5px;
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    .filter-checkbox-input:checked + .filter-checkbox-label, .filter-checkbox-label.checked {
+        border-color: #3573a4;
+    }
+    .filter-checkbox-input:checked + .filter-checkbox-label::after, .filter-checkbox-label.checked::after {
+        height: 15px;
+        -moz-animation: dothabottomcheck 0.2s ease 0s forwards;
+        -o-animation: dothabottomcheck 0.2s ease 0s forwards;
+        -webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
+        animation: dothabottomcheck 0.2s ease 0s forwards;
+    }
+    .filter-checkbox-input:checked + .filter-checkbox-label::before, .filter-checkbox-label.checked::before {
+        height: 36px;
+        -moz-animation: dothatopcheck 0.4s ease 0s forwards;
+        -o-animation: dothatopcheck 0.4s ease 0s forwards;
+        -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
+        animation: dothatopcheck 0.4s ease 0s forwards;
+    }
+
+
+    .filter-checkbox-label:nth-child(n+4){
+        display: none;
+    }
+    .filter-open-labels {
+        display: inline-block;
+        margin: 5px auto;
+        color: black;
+        font-style: italic;
+        font-weight: bolder;
+        text-decoration: none;
+        border-bottom: 1px dashed black;
+        opacity: .8;
+
+    }
+
+    @media screen and (max-width: 1021px) {
+       body {
+           margin: 0;
+           padding: 0;
+       }
+        .filter {
+            width: 100%;
+            height: 100%;
+
+        }
+        .btn-dropdown-filter {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: url("https://giroskutershop.ru/t/v1918/images/redio.jpg");
+        }
+        .filter-container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding-bottom: 0;
+        }
+        .filter-input-text {
+            width: 40%;
+
+        }
+        .filter-list {
+            max-height: 55%;
+            overflow-y: auto;
+
+        }
+        .filter-dropdown-item {
+            margin: 0 auto;
+        }
+        .filter-price-beetween {
+            width: 10%;
+        }
+        .filter-container-btn {
+            width: 100%;
+        }
+
+    }
+
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="filter">
+<button class="btn-dropdown-filter">Фильтр</button>
+<form class="filter-container" id="filter-form" onsubmit="return false">
+    <div class="filter-price-label">Цена</div>
+    <div class="filter-dropdown-item filter-price-container">
+        <div class="filter-item-input">
+            <input type="text" class="filter-input-min filter-input-text" >
+            <div class="filter-price-beetween"></div>
+            <input type="text" class="filter-input-max filter-input-text" >
+        </div>
+        <div class="filter-item-range">
+            <input type="range"  data-min="0" data-max="100000"   class="js-range-slider filter-range-price" name="my_range"/>
+        </div>
+    </div>
+    <ul class="filter-list">
+        <li class="filter-dropdown-link">Привод</li>
+        <div class="filter-dropdown-item">
+            <div class="filter-item-checkbox">
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+                <label  class="filter-checkbox-label">
+                    <input type="checkbox" class="filter-checkbox-input">
+                    <div class="filter-checkbox-text">Передний</div>
+                </label>
+
+                <a href="" class="filter-open-labels" onclick="return false;">Показать все</a>
+
+            </div>
+        </div>
+        <li class="filter-dropdown-link">Максимальная скорость</li>
+        <div class="filter-dropdown-item">
+            <div class="filter-item-input">
+            <input type="text" class="filter-input-min filter-input-text">
+            <div class="filter-price-beetween"></div>
+            <input type="text" class="filter-input-max filter-input-text">
+            </div>
+            <div class="filter-item-range">
+                <input type="range"  data-min="0" data-max="300"   class="js-range-slider" name="my_range"/>
+            </div>
+        </div>
+        <li class="filter-dropdown-link">Максимальная нагрузка</li>
+        <div class="filter-dropdown-item" >
+            <div class="filter-item-input">
+                <input type="text" class="filter-input-min filter-input-text">
+                <div class="filter-price-beetween"></div>
+                <input type="text" class="filter-input-max filter-input-text">
+            </div>
+            <div class="filter-item-range">
+                <input type="range"  data-min="0" data-max="300" class="js-range-slider" name="my_range"/>
+            </div>
+        </div>
+        <li class="filter-dropdown-link">Вес</li>
+        <div class="filter-dropdown-item">
+            <div class="filter-item-input">
+                <input type="text" class="filter-input-min filter-input-text">
+                <div class="filter-price-beetween"></div>
+                <input type="text" class="filter-input-max filter-input-text">
+            </div>
+            <div class="filter-item-range">
+                <input type="range"  data-min="0" data-max="100000"   class="js-range-slider" name="my_range"/>
+            </div>
+        </div>
+
+        <a href="" class="filter-open-links" onclick="return false;">Показать все</a>
+
+    </ul>
+    <div class="filter-container-btn">
+        <div  class="filter-btn-close">X</div>
+        <input type="reset" class="filter-btn-clear" value="Сброс"" >
+        <button type="submit" class="filter-btn-show">Показать</button>
+
+    </div>
+
+</form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+<script>
+    $(document).ready(function() {
+        dropdownClick();
+        rangeSlider();
+        showAllElements();
+        refreshRange();
+        clearForm();
+        filterCheckbox();
+
+        function dropdownClick() {
+            $('.btn-dropdown-filter').click(function () {
+                var display = $('.filter-container').css('display');
+                if (display == 'none') {
+                    if ($(window).width() >= 1020) {
+                        $('.filter-container').slideDown('slow');
+                    }else {
+                        $('.filter-container').fadeIn('slow');
+                    }
+                } else {
+                    if ($(window).width() >= 1020) {
+                        $('.filter-container').slideUp('slow');
+                    }else {
+                        $('.filter-container').fadeOut('slow');
+                    }
+                }
+            });
+            $('.filter-btn-close').click(function (){
+                if ($(window).width() >= 1020) {
+                    $('.filter-container').slideUp('slow');
+                }else {
+                    $('.filter-container').fadeOut('slow');
+                }
+            });
+
+
+        $('.filter-dropdown-link').click(function () {
+            var display = $(this).next('.filter-dropdown-item').css('display');
+            if (display == 'none') {
+                    $(this).next('.filter-dropdown-item').slideDown();
+                }else {
+                    $(this).next('.filter-dropdown-item').slideUp();
+            }
+        });
+
+    }
+        function rangeSlider() {
+            $('.js-range-slider').ionRangeSlider({
+                type: 'double',
+                grid: true,
+                from: 0,
+
+                onStart: function (data) {
+                    data.slider.closest('.filter-dropdown-item')
+                        .find('.filter-input-min')
+                        .attr({placeholder: data.from, value: data.from});
+
+                    data.slider.closest('.filter-dropdown-item')
+                        .find('.filter-input-max')
+                        .attr({placeholder: data.to, value: data.to});
+                },
+                onChange: function (data) {
+                        data.slider.closest('.filter-dropdown-item')
+                            .find('.filter-input-min')
+                            .val(data.from);
+                        data.slider.closest('.filter-dropdown-item')
+                            .find('.filter-input-max')
+                            .val(data.to);
+
+
+                }
+            });
+        }
+        function showAllElements() {
+            $('.filter-open-links').click(function () {
+                $('.filter-dropdown-link:nth-child(n+3)').fadeIn('slow');
+                $('.filter-open-links').remove();
+            });
+            $('.filter-open-labels').click(function () {
+                $('.filter-checkbox-label:nth-child(n+4)').fadeIn('slow');
+                $('.filter-open-labels').remove();
+
+
+            })
+        }
+        function refreshRange() {
+            $('.filter-input-text').on('input change', function() {
+                if ($(this).hasClass('filter-input-min')) {
+                    $(this).closest('.filter-dropdown-item')
+                           .find('.js-range-slider')
+                           .data("ionRangeSlider")
+                           .update({
+                        from: $(this).val()
+                    });
+                }else if ($(this).hasClass('filter-input-max')) {
+                    $(this).closest('.filter-dropdown-item')
+                           .find('.js-range-slider')
+                           .data("ionRangeSlider")
+                           .update({
+                        to: $(this).val()
+                    });
+                }
+            });
+        }
+        function clearForm () {
+            $("#filter-form").on("reset", function () {
+                setTimeout(function () {
+                    $(".filter-input-min, .filter-input-max").change()
+                });
+
+                $('.filter-checkbox-label').removeClass('checked');
+
+            });
+        }
+        function filterCheckbox () {
+
+            $('.filter-checkbox-label').click(function () {
+
+                if ($(this).children('.filter-checkbox-input').prop('checked')){
+
+                    $(this).addClass('checked');
+
+                }else {
+
+                    $(this).removeClass('checked');
+
+                }
+
+            });
+
+        }
+
+
+    });
+</script>
